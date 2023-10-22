@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import './StartPage.css';
 
-const StartPage = () => {
+const StartPage = (props) => {
 
     const [generatedText, setGeneratedText] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -41,6 +41,7 @@ const StartPage = () => {
         console.log(data.choices[0].text);
         if (data.choices && data.choices.length > 0) {
             setGeneratedText(data.choices[0].text);
+            props.setQuizData(data.choices[0].text);
         } else {
             setGeneratedText("Error: Could not generate text");
         }
@@ -50,8 +51,8 @@ const StartPage = () => {
     return (
         <div className="flex flex-col h-screen justify-center items-center p-8">
             <h1 className="text-4xl font-bold text-center mb-16">Jeopardy AI</h1>
-            <h2 className="text-lg text-center mb-8">Get ready for Jeopardy AI, a personalized version of Jeopardy with a twist!</h2>
-            <h2 className="text-lg text-center mb-8">Game twists were inspired by Codename and Exploding Kittens board games 😄</h2>
+            <h2 className="text-lg text-center mb-8">Get ready for Jeopardy AI, the personalized version of Jeopardy with a twist!</h2>
+            <h2 className="text-lg text-center mb-8">Game twists were inspired by Codename and Exploding Kittens board games 🙂</h2>
             <h2 className="text-lg text-center mb-8">---</h2>
             <h2 className="text-lg text-center mb-8">To start, enter a theme and press <strong>START</strong></h2>
             <div className="w-full max-w-md">
