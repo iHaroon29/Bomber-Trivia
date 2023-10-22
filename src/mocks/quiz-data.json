@@ -1,0 +1,37 @@
+{
+    "Tailwind Installation": {
+      "Easy": {
+        "Question": "What command line tool can be used to install Tailwind CSS?",
+        "MultipleChoice": ["A) apt-get", "B) npm", "C) yarn", "D) gem"],
+        "Answer": "B) npm"
+      },
+      "Medium": {
+        "Question": "How do you download Tailwind CSS from npm?",
+        "MultipleChoice": ["A) cd download/tailwind", "B) npm install tailwind", "C) wget tailwind", "D) git clone Tailwind"],
+        "Answer": "B) npm install tailwind"
+      },
+      "Hard": {
+        "Question": "Out of all the available Tailwind CSS plugins, which one allows the generation of dark mode stylesheets?",
+        "MultipleChoice": ["A) Tailwind UI", "B) Tailwind Typography", "C) Tailwind RGL", "D) Tailwind Dark Mode"],
+        "Answer": "D) Tailwind Dark Mode"
+      }
+    },
+  
+    "Tailwind Utilities": {
+      "Easy": {
+        "Question": "How are Tailwind CSS utility classes applied to a web page?",
+        "MultipleChoice": ["A) <utility> element", "B) <!-- utility --> comment", "C) classes attribute", "D) tailwind.css stylesheet"],
+        "Answer": "C) classes attribute"
+      },
+      "Medium": {
+        "Question": "Which of these is not considered part of a Tailwind CSS utility class?",
+        "MultipleChoice": ["A) flex-wrap", "B) m-auto", "C) border-outline", "D) sigil of sorting"],
+        "Answer": "D) sigil of sorting"
+      },
+      "Hard": {
+        "Question": "When overriding Tailwind CSS utility classes, which one of these would not be correct?",
+        "MultipleChoice": ["A) @tailwind utilities;", "B) app.tailwind css;", "C) my-theme.tailwind.css;", "D) @tailwind base;"],
+        "Answer": "B) app.tailwind css;"
+      }
+    }
+  }
