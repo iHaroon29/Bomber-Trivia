@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react';
 import './StartPage.css';
 
-const StartPage: React.FC = () => {
+const StartPage = () => {
 
-    const [generatedText, setGeneratedText] = useState<string>('');
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const inputRef = useRef<HTMLInputElement>(null);
+    const [generatedText, setGeneratedText] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const inputRef = useRef(null);
 
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const handleKeyDown = (event) => {
         if (event.key === "Enter") {
             generateText();
         }
@@ -27,7 +27,7 @@ const StartPage: React.FC = () => {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization:
-                        `Bearer ${(import.meta as any).env.VITE_OPEN_API_KEY}`,
+                        `Bearer ${(import.meta).env.VITE_OPEN_API_KEY}`,
                     "User-Agent": "Chrome",
                 },
                 body: JSON.stringify({
