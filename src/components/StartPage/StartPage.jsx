@@ -1,11 +1,13 @@
 import React, { useRef, useState } from 'react';
-import './StartPage.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const StartPage = (props) => {
 
     const [generatedText, setGeneratedText] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const inputRef = useRef(null);
+    const navigate = useNavigate();
 
     const handleKeyDown = (event) => {
         if (event.key === "Enter") {
@@ -20,31 +22,36 @@ const StartPage = (props) => {
 
         setIsLoading(true);
 
-        const response = await fetch(
-            "https://api.openai.com/v1/completions",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization:
-                        `Bearer ${(import.meta).env.VITE_OPEN_API_KEY}`,
-                    "User-Agent": "Chrome",
-                },
-                body: JSON.stringify({
+        try {
+            const response = await axios.post(
+                "https://api.openai.com/v1/completions",
+                {
                     prompt: `Please remember, I only want 1 and only 1 json object in your reply, only a json object, no other descriptive text. Make sure the json structure is category, then difficulty, with the first letters capitalized for the JSON keys, and the amount of text provided is minimal. Create a quiz with multiple choice answers for ${inputRef.current?.value}. Generate 2 quiz categories for ${inputRef.current?.value} with 3 levels of difficulty from easiest to hardest, and 3 questions per category, for a total of 6 questions. Return the quiz data in JSON format. The JSON object should have 1 object per category, with 3 questions per category where the difficulty is easy, medium, and hard. The categories should be named appropriate bubble title names. Each question should have a "Question" field, a "MultipleChoice" field with an array of 4 possible answers, and an "Answer" field with the correct answer. Make sure the categories are named properly. Make sure it's only a JSON object that you return, with no other text or fluff. Make sure you respond with 1 and only 1 json object. Please make sure that 100% of the time, you respond with 1 and only 1 json object, so that I can consume this JSON in my frontend app with no risks of errors. Please remember, I only want 1 and only 1 json object in your reply, only a json object, no other descriptive text.`,
                     max_tokens: 2056,
                     model: "text-davinci-003",
-                }),
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization:
+                            `Bearer ${(import.meta).env.VITE_OPEN_API_KEY}`,
+                    },
+                }
+            );
+            // console.log(response.data.choices[0].text);
+            if (response.data.choices && response.data.choices.length > 0) {
+                setGeneratedText(response.data.choices[0].text);
+                props.setQuizData(response.data.choices[0].text);
+                // await new Promise(resolve => setTimeout(resolve, 0));
+                navigate('/jeopardy');
+            } else {
+                setGeneratedText("Error: Could not generate text");
             }
-        );
-        let data = await response.json();
-        console.log(data.choices[0].text);
-        if (data.choices && data.choices.length > 0) {
-            setGeneratedText(data.choices[0].text);
-            props.setQuizData(data.choices[0].text);
-        } else {
+        } catch (error) {
+            console.error(error);
             setGeneratedText("Error: Could not generate text");
         }
+
         setIsLoading(false);
     }
 
