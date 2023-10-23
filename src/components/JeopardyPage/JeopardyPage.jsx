@@ -9,14 +9,9 @@ const JeopardyPage = () => {
     const quizData = JSON.parse(quizDataString.trim());
     
     useEffect(() => {
-        console.log(quizData);
     }, [quizData]);
 
     const handleQuestionClick = (category, difficulty, questionData) => {
-        console.log(category);
-        console.log(difficulty);
-        console.log(questionData);
-
         setSelectedQuestion({ category, difficulty, questionData });
         navigate('/quiz', { state: { category, difficulty, questionData } });
     };

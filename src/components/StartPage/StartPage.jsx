@@ -38,11 +38,9 @@ const StartPage = (props) => {
                     },
                 }
             );
-            // console.log(response.data.choices[0].text);
             if (response.data.choices && response.data.choices.length > 0) {
                 setGeneratedText(response.data.choices[0].text);
                 props.setQuizData(response.data.choices[0].text);
-                // await new Promise(resolve => setTimeout(resolve, 0));
                 navigate('/jeopardy');
             } else {
                 setGeneratedText("Error: Could not generate text");
