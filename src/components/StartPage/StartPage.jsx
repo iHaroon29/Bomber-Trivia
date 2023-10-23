@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
-// import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { postData } from '../../utils/axios_utils'
+import './StartPage.css'
 
 const StartPage = (props) => {
   const [generatedText, setGeneratedText] = useState('')
