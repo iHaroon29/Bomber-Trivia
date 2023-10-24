@@ -8,6 +8,7 @@ import {
   QuizDataContext,
   AuthContext,
 } from './utils/app_context'
+import './app.css';
 
 import { Protected } from './utils/router_utils'
 
