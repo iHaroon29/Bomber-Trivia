@@ -8,6 +8,7 @@ const StartPage = (props) => {
   const [isLoading, setIsLoading] = useState(false)
   const inputRef = useRef(null)
   const navigate = useNavigate()
+  const playerGlobalData = useContext(GlobalPlayerContext)
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
@@ -50,6 +51,7 @@ const StartPage = (props) => {
         Get ready for Jeopardy AI, the personalized version of Jeopardy with a
         twist!
       </h2>
+      <p>{playerGlobalData.bombs}</p>
       <h2 className='text-lg text-center mb-8'>
         Game twists were inspired by Codename and Exploding Kittens board games
         🙂
