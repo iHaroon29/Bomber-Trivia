@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+
 import { useNavigate } from 'react-router-dom'
 import { postData } from '../../utils/axios_utils'
 import './StartPage.css'
@@ -31,6 +32,7 @@ const StartPage = (props) => {
       if (response.data.choices && response.data.choices.length > 0) {
         setGeneratedText(response.data.choices[0].text)
         props.setQuizData(response.data.choices[0].text)
+        props.setAuth(true)
         navigate('/jeopardy')
       } else {
         setGeneratedText('Error: Could not generate text')
@@ -80,6 +82,7 @@ const StartPage = (props) => {
           </button>
         </div>
       </div>
+
       {/* <div className="mt-8">
                 {generatedText}
             </div> */}
