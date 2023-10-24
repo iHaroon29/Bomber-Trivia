@@ -3,7 +3,13 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import StartPage from './components/StartPage/StartPage'
 import JeopardyPage from './components/JeopardyPage/JeopardyPage'
 import QuizPage from './components/QuizPage/QuizPage'
-import { GlobalPlayerContext, QuizDataContext } from './utils/app_context'
+import {
+  GlobalPlayerContext,
+  QuizDataContext,
+  AuthContext,
+} from './utils/app_context'
+
+import { Protected } from './utils/router_utils'
 
 export default function App() {
   const [quizData, setQuizData] = useState('')
@@ -11,29 +17,54 @@ export default function App() {
   const [bombs, setBombs] = useState(0)
   const [mysteryBoxes, setMysteryBoxes] = useState(0)
   const [bombDiffusers, setBombDiffusers] = useState(0)
+  const [bombIndexes, setBombIndexes] = useState([])
+  const [mysteryBoxesIndexes, setMysteryBoxesIndexes] = useState([])
+  const [auth, setAuth] = useState(false)
+
   return (
     <BrowserRouter>
       <GlobalPlayerContext.Provider
-        value={{ playerScore, bombs, mysteryBoxes, bombDiffusers }}
+        value={{
+          playerScore,
+          bombs,
+          mysteryBoxes,
+          bombDiffusers,
+          bombIndexes,
+          mysteryBoxesIndexes,
+        }}
       >
-        <QuizDataContext.Provider value={quizData}>
-          <Routes>
-            <Route path='/' element={<StartPage setQuizData={setQuizData} />} />
-            <Route
-              path='/jeopardy'
-              element={<JeopardyPage setBombs={setBombs} />}
-            />
-            <Route
-              path='/quiz'
-              element={
-                <QuizPage
-                  setPlayerScore={setPlayerScore}
-                  setBombDiffusers={setBombDiffusers}
+        <AuthContext.Provider value={auth}>
+          <QuizDataContext.Provider value={quizData}>
+            <Routes>
+              <Route
+                path='/'
+                element={
+                  <StartPage setQuizData={setQuizData} setAuth={setAuth} />
+                }
+              />
+              <Route element={<Protected />}>
+                <Route
+                  path='/jeopardy'
+                  element={
+                    <JeopardyPage
+                      setBombs={setBombs}
+                      setMysteryBoxes={setMysteryBoxes}
+                    />
+                  }
                 />
-              }
-            />
-          </Routes>
-        </QuizDataContext.Provider>
+                <Route
+                  path='/quiz'
+                  element={
+                    <QuizPage
+                      setPlayerScore={setPlayerScore}
+                      setBombDiffusers={setBombDiffusers}
+                    />
+                  }
+                />
+              </Route>
+            </Routes>
+          </QuizDataContext.Provider>
+        </AuthContext.Provider>
       </GlobalPlayerContext.Provider>
     </BrowserRouter>
   )

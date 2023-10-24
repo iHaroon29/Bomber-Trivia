@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+
 import { useNavigate } from 'react-router-dom'
 import { postData } from '../../utils/axios_utils'
 import './StartPage.css'
@@ -8,7 +9,6 @@ const StartPage = (props) => {
   const [isLoading, setIsLoading] = useState(false)
   const inputRef = useRef(null)
   const navigate = useNavigate()
-  const playerGlobalData = useContext(GlobalPlayerContext)
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
@@ -32,6 +32,7 @@ const StartPage = (props) => {
       if (response.data.choices && response.data.choices.length > 0) {
         setGeneratedText(response.data.choices[0].text)
         props.setQuizData(response.data.choices[0].text)
+        props.setAuth(true)
         navigate('/jeopardy')
       } else {
         setGeneratedText('Error: Could not generate text')
@@ -51,7 +52,6 @@ const StartPage = (props) => {
         Get ready for Jeopardy AI, the personalized version of Jeopardy with a
         twist!
       </h2>
-      <p>{playerGlobalData.bombs}</p>
       <h2 className='text-lg text-center mb-8'>
         Game twists were inspired by Codename and Exploding Kittens board games
         🙂
@@ -82,6 +82,7 @@ const StartPage = (props) => {
           </button>
         </div>
       </div>
+
       {/* <div className="mt-8">
                 {generatedText}
             </div> */}

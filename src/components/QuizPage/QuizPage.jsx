@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
-const QuizPage = () => {
+const QuizPage = ({ setPlayerScore }) => {
   const selectedQuestion = useLocation().state
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [message, setMessage] = useState(null)
@@ -15,6 +15,9 @@ const QuizPage = () => {
   const handleAnswerClick = (answer) => {
     setSelectedAnswer(answer)
     if (answer === selectedQuestion.questionData.Answer) {
+      setPlayerScore(
+        (prev) => prev + getPointValue(selectedQuestion.difficulty)
+      )
       setMessage('Correct!')
     } else {
       setMessage('Incorrect!')
@@ -23,6 +26,19 @@ const QuizPage = () => {
 
   const handleBackClick = () => {
     navigate('/jeopardy')
+  }
+
+  const getPointValue = (difficulty) => {
+    switch (difficulty) {
+      case 'Easy':
+        return 50
+      case 'Medium':
+        return 100
+      case 'Hard':
+        return 200
+      default:
+        return ''
+    }
   }
 
   return (
