@@ -47,17 +47,13 @@ const StartPage = (props) => {
 
   return (
     <div className='flex flex-col h-screen justify-center items-center p-8'>
-      <h1 className='text-4xl font-bold text-center mb-16'>Jeopardy AI</h1>
-      <h2 className='text-lg text-center mb-8'>
+      <h1 className='text-4xl font-bold text-center mb-16 text-white'>Personalized Trivia</h1>
+      <h2 className='text-lg text-center mb-8 text-white'>
         Get ready for Jeopardy AI, the personalized version of Jeopardy with a
         twist!
       </h2>
-      <h2 className='text-lg text-center mb-8'>
-        Game twists were inspired by Codename and Exploding Kittens board games
-        🙂
-      </h2>
-      <h2 className='text-lg text-center mb-8'>---</h2>
-      <h2 className='text-lg text-center mb-8'>
+      <h2 className='text-lg text-center mb-8 text-white'>---</h2>
+      <h2 className='text-lg text-center mb-8 text-white'>
         To start, enter a theme and press <strong>START</strong>
       </h2>
       <div className='w-full max-w-md'>
