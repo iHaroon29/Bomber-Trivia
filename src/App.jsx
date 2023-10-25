@@ -9,7 +9,7 @@ import {
   AuthContext,
 } from './utils/app_context'
 import { Protected } from './utils/router_utils'
-// import './app.css'
+import './app.css'
 
 export default function App() {
   const [quizData, setQuizData] = useState('')
@@ -35,36 +35,34 @@ export default function App() {
       >
         <AuthContext.Provider value={auth}>
           <QuizDataContext.Provider value={quizData}>
-            <div style={{ backgroundColor: '#333333' }}>
-              <Routes>
+            <Routes>
+              <Route
+                path='/'
+                element={
+                  <StartPage setQuizData={setQuizData} setAuth={setAuth} />
+                }
+              />
+              <Route element={<Protected />}>
                 <Route
-                  path='/'
+                  path='/jeopardy'
                   element={
-                    <StartPage setQuizData={setQuizData} setAuth={setAuth} />
+                    <JeopardyPage
+                      setBombs={setBombs}
+                      setMysteryBoxes={setMysteryBoxes}
+                    />
                   }
                 />
-                <Route element={<Protected />}>
-                  <Route
-                    path='/jeopardy'
-                    element={
-                      <JeopardyPage
-                        setBombs={setBombs}
-                        setMysteryBoxes={setMysteryBoxes}
-                      />
-                    }
-                  />
-                  <Route
-                    path='/quiz'
-                    element={
-                      <QuizPage
-                        setPlayerScore={setPlayerScore}
-                        setBombDiffusers={setBombDiffusers}
-                      />
-                    }
-                  />
-                </Route>
-              </Routes>
-            </div>
+                <Route
+                  path='/quiz'
+                  element={
+                    <QuizPage
+                      setPlayerScore={setPlayerScore}
+                      setBombDiffusers={setBombDiffusers}
+                    />
+                  }
+                />
+              </Route>
+            </Routes>
           </QuizDataContext.Provider>
         </AuthContext.Provider>
       </GlobalPlayerContext.Provider>
