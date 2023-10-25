@@ -8,9 +8,8 @@ import {
   QuizDataContext,
   AuthContext,
 } from './utils/app_context'
-import './app.css';
-
 import { Protected } from './utils/router_utils'
+import './app.css'
 
 export default function App() {
   const [quizData, setQuizData] = useState('')
