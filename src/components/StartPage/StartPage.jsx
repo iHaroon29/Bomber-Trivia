@@ -47,47 +47,41 @@ const StartPage = (props) => {
 
   return (
     <div className='flex flex-col h-screen justify-center items-center p-8'>
-      <h1 className='text-4xl font-bold text-center mb-16'>Jeopardy AI</h1>
-      <h2 className='text-lg text-center mb-8'>
+      <h1 className='text-4xl font-bold text-center mb-16 text-white'>Personalized Trivia</h1>
+      <h2 className='text-lg text-center mb-8 text-white'>
         Get ready for Jeopardy AI, the personalized version of Jeopardy with a
         twist!
       </h2>
-      <h2 className='text-lg text-center mb-8'>
-        Game twists were inspired by Codename and Exploding Kittens board games
-        🙂
+      <h2 className='text-lg text-center mb-8 text-white'>---</h2>
+      <h2 className='text-lg text-center mb-8 text-white'>
+        To start, enter a topic and press <strong>START</strong>
       </h2>
-      <h2 className='text-lg text-center mb-8'>---</h2>
-      <h2 className='text-lg text-center mb-8'>
-        To start, enter a theme and press <strong>START</strong>
-      </h2>
-      <div className='w-full max-w-md'>
-        <div className='flex items-center border-b border-b-2 border-teal-500 py-2'>
+      <div className='w-full max-w-lg'>
+        <div className='flex flex-col'>
           <input
-            className='appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none'
+            className='py-4 appearance-none bg-gray-200 border-none rounded-t-md w-full text-gray-700 mr-3 py-1 px-4 leading-tight focus:outline-none'
             type='text'
-            placeholder='Enter Text'
+            placeholder='Enter Topic'
             aria-label='Full name'
             ref={inputRef}
             onKeyDown={handleKeyDown}
           />
           <button
-            className='flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded'
+            className='py-4 flex-shrink-0 bg-green-700 hover:bg-green-900 border-green-700 hover:border-green-900 text-sm border-4 text-white py-1 px-2 rounded-b-md w-full'
             type='button'
             onClick={() => {
               generateText()
             }}
             disabled={isLoading}
           >
-            {isLoading ? <div className='spinner'></div> : 'START'}
+            <div className='flex justify-center'>
+              {isLoading ? <div className='spinner'></div> : 'START'}
+            </div>
           </button>
         </div>
       </div>
-
-      {/* <div className="mt-8">
-                {generatedText}
-            </div> */}
     </div>
-  )
+  );
 }
 
 export default StartPage
