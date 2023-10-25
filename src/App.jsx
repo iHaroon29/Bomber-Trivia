@@ -9,7 +9,7 @@ import {
   AuthContext,
 } from './utils/app_context'
 
-import { Protected } from './utils/router_utils'
+import { Protected, Redirect } from './utils/router_utils'
 
 export default function App() {
   const [quizData, setQuizData] = useState('')
@@ -62,6 +62,7 @@ export default function App() {
                   }
                 />
               </Route>
+              <Route path='*' element={<Redirect path='/' />} />
             </Routes>
           </QuizDataContext.Provider>
         </AuthContext.Provider>
