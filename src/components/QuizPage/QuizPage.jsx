@@ -57,7 +57,7 @@ const QuizPage = ({ setPlayerScore }) => {
       <h2 className='text-center font-bold text-2xl px-4 py-6 text-white'>{selectedQuestion.questionData.Question}</h2>
       <div className="flex flex-col gap-4 px-4 flex-grow">
         {selectedQuestion.questionData.MultipleChoice.map((answer, index) => (
-          <button key={index} className={`bg-gray-100 p-2 rounded-lg flex justify-center items-center h-16 ${selectedAnswer === answer ? 'border-blue-500' : 'border-gray-400'} ${selectedAnswer === answer && selected ? 'bg-blue-300' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`} onClick={() => handleAnswerClick(answer)} disabled={disabled}>
+          <button key={index} className={`bg-gray-100 p-2 rounded-lg flex justify-center items-center h-16 ${selectedAnswer === answer && selected ? 'bg-blue-200' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`} onClick={() => handleAnswerClick(answer)} disabled={disabled}>
             <div className="text-center">{answer}</div>
           </button>
         ))}
@@ -65,7 +65,7 @@ const QuizPage = ({ setPlayerScore }) => {
       {message && (
         <div className="fixed bottom-0 w-full flex flex-col items-center px-4 py-8">
           <p className="text-xl pb-20 text-white">{message}</p>
-          <button className={`bg-green-700 text-white p-2 rounded-lg flex justify-center items-center h-16 ${selectedAnswer ? 'border-gray-400' : 'border-blue-500'} text-black font-bold w-full`} onClick={handleBackClick}>
+          <button className={`bg-green-700 text-white p-2 rounded-lg flex justify-center items-center h-16 text-black font-bold w-full`} onClick={handleBackClick}>
             BACK TO TRIVIA BOARD
           </button>
         </div>
