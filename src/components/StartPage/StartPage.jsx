@@ -59,7 +59,7 @@ const StartPage = (props) => {
       <div className='w-full max-w-lg'>
         <div className='flex flex-col'>
           <input
-            className='py-4 appearance-none bg-gray-200 border-none rounded-t-md w-full text-gray-700 mr-3 py-1 px-4 leading-tight focus:outline-none'
+            className='text-center py-4 appearance-none bg-gray-200 border-none rounded-t-md w-full text-gray-700 mr-3 py-1 px-4 leading-tight focus:outline-none'
             type='text'
             placeholder='Enter Topic'
             aria-label='Full name'
