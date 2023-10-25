@@ -35,34 +35,36 @@ export default function App() {
       >
         <AuthContext.Provider value={auth}>
           <QuizDataContext.Provider value={quizData}>
-            <Routes>
-              <Route
-                path='/'
-                element={
-                  <StartPage setQuizData={setQuizData} setAuth={setAuth} />
-                }
-              />
-              <Route element={<Protected />}>
+            <div style={{ backgroundColor: '#333333' }}>
+              <Routes>
                 <Route
-                  path='/jeopardy'
+                  path='/'
                   element={
-                    <JeopardyPage
-                      setBombs={setBombs}
-                      setMysteryBoxes={setMysteryBoxes}
-                    />
+                    <StartPage setQuizData={setQuizData} setAuth={setAuth} />
                   }
                 />
-                <Route
-                  path='/quiz'
-                  element={
-                    <QuizPage
-                      setPlayerScore={setPlayerScore}
-                      setBombDiffusers={setBombDiffusers}
-                    />
-                  }
-                />
-              </Route>
-            </Routes>
+                <Route element={<Protected />}>
+                  <Route
+                    path='/jeopardy'
+                    element={
+                      <JeopardyPage
+                        setBombs={setBombs}
+                        setMysteryBoxes={setMysteryBoxes}
+                      />
+                    }
+                  />
+                  <Route
+                    path='/quiz'
+                    element={
+                      <QuizPage
+                        setPlayerScore={setPlayerScore}
+                        setBombDiffusers={setBombDiffusers}
+                      />
+                    }
+                  />
+                </Route>
+              </Routes>
+            </div>
           </QuizDataContext.Provider>
         </AuthContext.Provider>
       </GlobalPlayerContext.Provider>
