@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 body {
-    background-color: #333333;
-  }
+  background-image: url('./assets/bg-mountains8.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
   
