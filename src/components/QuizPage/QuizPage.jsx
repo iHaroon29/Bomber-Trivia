@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { GlobalPlayerContext, QuizDataContext } from '../../utils/app_context'
 
-const QuizPage = ({ setPlayerScore }) => {
+const QuizPage = () => {
   const selectedQuestion = useLocation().state
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [message, setMessage] = useState(null)
   const navigate = useNavigate()
   const [disabled, setDisabled] = useState(false);
   const [selected, setSelected] = useState(false);
+  const { playerScore, setPlayerScore } = useContext(GlobalPlayerContext);
+
+  const quizDataString = useContext(QuizDataContext)
+  const quizData = JSON.parse(quizDataString.trim())
 
   useEffect(() => {
     console.log(selectedQuestion)
@@ -19,9 +24,8 @@ const QuizPage = ({ setPlayerScore }) => {
     setDisabled(true);
     setSelected(true);
     if (answer === selectedQuestion.questionData.Answer) {
-      setPlayerScore(
-        (prev) => prev + getPointValue(selectedQuestion.difficulty)
-      )
+      const pointValue = getPointValue(selectedQuestion.difficulty);
+      setPlayerScore((prevScore) => prevScore + pointValue);
       setMessage('Correct!')
     } else {
       setMessage('Incorrect!')
@@ -44,6 +48,10 @@ const QuizPage = ({ setPlayerScore }) => {
         return ''
     }
   }
+
+  useEffect(() => {
+    console.log('Player score:', playerScore)
+  }, [playerScore])
 
   return (
     <div>

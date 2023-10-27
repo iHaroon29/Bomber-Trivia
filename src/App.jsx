@@ -25,6 +25,7 @@ export default function App() {
       <GlobalPlayerContext.Provider
         value={{
           playerScore,
+          setPlayerScore,
           bombs,
           mysteryBoxes,
           bombDiffusers,

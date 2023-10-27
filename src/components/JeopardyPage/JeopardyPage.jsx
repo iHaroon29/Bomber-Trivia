@@ -7,6 +7,7 @@ const JeopardyPage = (props) => {
   const navigate = useNavigate()
   const quizDataString = useContext(QuizDataContext)
   const quizData = JSON.parse(quizDataString.trim())
+  const { playerScore, setPlayerScore } = useContext(GlobalPlayerContext);
 
   useEffect(() => {}, [quizData])
 
@@ -33,8 +34,8 @@ const JeopardyPage = (props) => {
       <h1 className='text-center py-6 font-bold text-3xl text-white'>Personalized Trivia</h1>
       <div className='bg-black py-1'>
         <div className='flex flex-col justify-center text-white'>
-          <h2 className='text-center'>xx</h2>
-          <h2 className='text-center'>xx</h2>
+          <h2 className='text-center py-3'>Score: {playerScore} | Bombs: {} | Diffusers: {} </h2>
+          {/* <h2 className='text-center'>xx</h2> */}
         </div>
       </div>
       <div className='grid grid-cols-2 gap-4 px-4'>
