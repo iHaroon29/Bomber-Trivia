@@ -25,7 +25,7 @@ const StartPage = (props) => {
 
     try {
       const response = await postData('/completions', {
-        prompt: `Please remember, I only want 1 and only 1 json object in your reply, only a json object, no other descriptive text. Make sure the json structure is category, then difficulty, with the first letters capitalized for the JSON keys, and the amount of text provided is minimal. Create a quiz with multiple choice answers for ${inputRef.current?.value}. Generate 2 quiz categories for ${inputRef.current?.value} with 3 levels of difficulty from easiest to hardest, and 3 questions per category, for a total of 6 questions. Return the quiz data in JSON format. The JSON object should have 1 object per category, with 3 questions per category where the difficulty is easy, medium, and hard. The categories should be named appropriate bubble title names. Each question should have a "Question" field, a "MultipleChoice" field with an array of 4 possible answers, and an "Answer" field with the correct answer. Make sure the categories are named properly. Make sure it's only a JSON object that you return, with no other text or fluff. Make sure you respond with 1 and only 1 json object. Please make sure that 100% of the time, you respond with 1 and only 1 json object, so that I can consume this JSON in my frontend app with no risks of errors. Please remember, I only want 1 and only 1 json object in your reply, only a json object, no other descriptive text.`,
+        prompt: `Please remember, I only want 1 and only 1 json object in your reply, only a json object, no other descriptive text. Make sure you always give me 2 categories, sometimes you give me 1, please make sure to ONLY give me 2 categories. Make sure the json structure is category, then difficulty, with the first letters capitalized for the JSON keys, and the amount of text provided is minimal. Create a quiz with multiple choice answers for ${inputRef.current?.value}. Generate 2 quiz categories for ${inputRef.current?.value} with 3 levels of difficulty from easiest to hardest, and 3 questions per category, for a total of 6 questions. Return the quiz data in JSON format. The JSON object should have 1 object per category, with 3 questions per category where the difficulty is easy, medium, and hard. The categories should be named appropriate bubble title names. Each question should have a "Question" field, a "MultipleChoice" field with an array of 4 possible answers, and an "Answer" field with the correct answer. Make sure the categories are named properly. Make sure it's only a JSON object that you return, with no other text or fluff. Make sure you respond with 1 and only 1 json object. Please make sure that 100% of the time, you respond with 1 and only 1 json object, so that I can consume this JSON in my frontend app with no risks of errors. Please remember, I only want 1 and only 1 json object in your reply, only a json object, no other descriptive text.`,
         max_tokens: 2056,
         model: 'text-davinci-003',
       })
@@ -47,10 +47,10 @@ const StartPage = (props) => {
 
   return (
     <div className='flex flex-col h-screen justify-center items-center p-8'>
-      <h1 className='text-4xl font-bold text-center mb-16 text-white'>Booming Trivia</h1>
-      <div className='bg-gray-100 rounded mb-8 p-4'>
+      <h1 className='text-4xl font-bold text-center mb-16 text-white'>Spooky Trivia</h1>
+      <div className='bg-gray-100 rounded mb-8 p-4 container-width'>
         <h2 className='text-lg text-center'>
-          Get ready for <strong>Booming Trivia</strong>! The personalized Trivia game inspired by Jeopardy but with a
+          Get ready for <strong>Spooky Trivia</strong>! The personalized Trivia game inspired by Jeopardy but with a
           twist 💣 👻 🔧
         </h2>
       {/* </div> */}
