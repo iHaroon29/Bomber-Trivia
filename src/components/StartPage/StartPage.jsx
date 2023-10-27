@@ -47,15 +47,25 @@ const StartPage = (props) => {
 
   return (
     <div className='flex flex-col h-screen justify-center items-center p-8'>
-      <h1 className='text-4xl font-bold text-center mb-16 text-white'>Personalized Trivia</h1>
-      <h2 className='text-lg text-center mb-8 text-white'>
-        Get ready for Jeopardy AI, the personalized version of Jeopardy with a
-        twist!
+      <h1 className='text-4xl font-bold text-center mb-16 text-white'>Booming Trivia</h1>
+      <div className='bg-gray-100 rounded mb-8 p-4'>
+        <h2 className='text-lg text-center'>
+          Get ready for <strong>Booming Trivia</strong>! The personalized Trivia game inspired by Jeopardy but with a
+          twist 💣 👻 🔧
+        </h2>
+      {/* </div> */}
+      {/* <div className='bg-gray-100 rounded mb-8 p-2'> */}
+      <h2 className='text-lg text-center pt-8'>
+        <strong>Beware of the hidden bombs</strong>. If you stumble across one and answer incorrectly, you will lose the game.
       </h2>
-      <h2 className='text-lg text-center mb-8 text-white'>---</h2>
-      <h2 className='text-lg text-center mb-8 text-white'>
+      {/* <h2 className='text-lg text-center pt-8'>
+        To play, enter a topic and press <strong>PLAY</strong>
+      </h2> */}
+      </div>
+      {/* <h2 className='text-lg text-center mb-8 text-white'>---</h2> */}
+      {/* <h2 className='text-lg text-center mb-8 text-white'>
         To start, enter a topic and press <strong>START</strong>
-      </h2>
+      </h2> */}
       <div className='w-full max-w-lg'>
         <div className='flex flex-col'>
           <input
@@ -75,7 +85,7 @@ const StartPage = (props) => {
             disabled={isLoading}
           >
             <div className='flex justify-center'>
-              {isLoading ? <div className='spinner'></div> : 'START'}
+              {isLoading ? <div className='spinner'></div> : 'PLAY'}
             </div>
           </button>
         </div>
