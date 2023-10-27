@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 body {
-    background-color: #333333;
-  }
+  /* https://unsplash.com/photos/desert-at-night-a2kD4b0KK4s */
+  background-image: url('./assets/bg-mountains8-compressed.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
   
