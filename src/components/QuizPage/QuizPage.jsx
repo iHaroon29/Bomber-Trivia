@@ -10,6 +10,7 @@ const QuizPage = () => {
   const navigate = useNavigate()
   const [disabled, setDisabled] = useState(false);
   const [selected, setSelected] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
   const { playerScore, setPlayerScore } = useContext(GlobalPlayerContext);
 
   const quizDataString = useContext(QuizDataContext)
@@ -29,12 +30,30 @@ const QuizPage = () => {
       setPlayerScore((prevScore) => prevScore + pointValue);
       setMessage('Correct!')
     } else {
-      setMessage('Incorrect!')
+      if (selectedQuestion.isBomb) {
+        setMessage('Game over! You answered a bomb question incorrectly.');
+        setGameOver(true);
+      } else {
+        setMessage('Incorrect!')
+      }
     }
   }
 
   const handleBackClick = () => {
     navigate('/jeopardy')
+  }
+
+  const handleEndGameClick = () => {
+    navigate('/');
+  }
+
+  const handleNextClick = () => {
+    setSelectedAnswer('');
+    setDisabled(false);
+    setSelected(false);
+    setMessage('');
+    const { category, difficulty, questionData } = getRandomQuestion(selectedQuestion.questionData.Category, selectedQuestion.difficulty);
+    setSelectedQuestion({ category, difficulty, questionData });
   }
 
   const getPointValue = (difficulty) => {
@@ -81,9 +100,15 @@ const QuizPage = () => {
         {message && (
           <div className="fixed bottom-0 w-full flex flex-col items-center px-4 py-8">
             <p className="text-xl pb-20 text-white">{message}</p>
-            <button className={`bg-green-700 text-white p-2 rounded-lg flex justify-center items-center h-16 text-black font-bold w-full`} style={{ maxWidth: 600 }} onClick={handleBackClick}>
-              BACK TO TRIVIA BOARD
-            </button>
+            {gameOver ? (
+              <button className={`bg-red-700 text-white p-2 rounded-lg flex justify-center items-center h-16 text-black font-bold w-full`} style={{ maxWidth: 600 }} onClick={handleEndGameClick}>
+                BACK TO START
+              </button>
+            ) : (
+              <button className={`bg-green-700 text-white p-2 rounded-lg flex justify-center items-center h-16 text-black font-bold w-full`} style={{ maxWidth: 600 }} onClick={handleBackClick}>
+                BACK TO TRIVIA BOARD
+              </button>
+            )}
           </div>
         )}
       </div>
