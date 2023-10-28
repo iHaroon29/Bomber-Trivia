@@ -7,31 +7,41 @@ const JeopardyPage = (props) => {
   const navigate = useNavigate()
   const quizDataString = useContext(QuizDataContext)
   const quizData = JSON.parse(quizDataString) // .trim()might be needed.
-  const { playerScore, setPlayerScore, bombIndexes, setBombIndexes } = useContext(GlobalPlayerContext);
-  const { clickedButtons, setClickedButtons } = useContext(GlobalPlayerContext);
+  const { playerScore, setPlayerScore, bombIndexes, setBombIndexes } =
+    useContext(GlobalPlayerContext)
+  const { clickedButtons, setClickedButtons } = useContext(GlobalPlayerContext)
 
   useEffect(() => {
-    console.log(quizDataString);
+    console.log(quizDataString)
   }, [quizDataString])
 
   useEffect(() => {
     if (!bombIndexes.length) {
-      const randomIndex = Math.floor(Math.random() * 6);
-      setBombIndexes([randomIndex]);
+      const randomIndex = Math.floor(Math.random() * 6)
+      setBombIndexes([randomIndex])
     }
-    console.log(bombIndexes);
+    console.log(bombIndexes)
   }, [bombIndexes, setBombIndexes])
 
   useEffect(() => {
-    console.log('clickedButtons:', clickedButtons);
-  }, [clickedButtons]);
+    console.log('clickedButtons:', clickedButtons)
+  }, [clickedButtons])
 
-  const handleQuestionClick = (category, difficulty, questionData, index, questionIndex) => {
+  const handleQuestionClick = (
+    category,
+    difficulty,
+    questionData,
+    index,
+    questionIndex
+  ) => {
     setSelectedQuestion({ category, difficulty, questionData })
-    const isBomb = bombIndexes.includes(index * 3 + questionIndex);
+    const isBomb = bombIndexes.includes(index * 3 + questionIndex)
     navigate('/quiz', { state: { category, difficulty, questionData, isBomb } })
-    setClickedButtons(prevClickedButtons => [...prevClickedButtons, `${category}-${difficulty}-${questionIndex}`]);
-    console.log('clickedButtons:', clickedButtons);
+    setClickedButtons((prevClickedButtons) => [
+      ...prevClickedButtons,
+      `${category}-${difficulty}-${questionIndex}`,
+    ])
+    console.log('clickedButtons:', clickedButtons)
   }
 
   const getPointValue = (difficulty) => {
@@ -49,7 +59,9 @@ const JeopardyPage = (props) => {
 
   return (
     <div>
-      <h1 className='text-center py-6 font-bold text-3xl text-white'>Personalized Trivia</h1>
+      <h1 className='text-center py-6 font-bold text-3xl text-white'>
+        Personalized Trivia
+      </h1>
       <div className='bg-black py-1'>
         <div className='flex flex-col justify-center text-white'>
           <h2 className='text-center py-3'>Points: {playerScore} </h2>
@@ -61,12 +73,20 @@ const JeopardyPage = (props) => {
           <div className='grid grid-cols-2 gap-4 px-4'>
             {Object.entries(quizData).map(([category, questions], index) => (
               <div key={category}>
-                <h2 className='text-lg font-bold mb-2 text-center text-white pt-4'>{category}</h2>
+                <h2 className='text-lg font-bold mb-2 text-center text-white pt-4'>
+                  {category}
+                </h2>
                 <div>
                   {Object.keys(questions).map((difficulty, questionIndex) => (
                     <div key={difficulty} className='mb-4'>
                       <button
-                        className={`cursor-pointer hover:bg-gray-200 p-2 rounded-lg flex justify-center items-center h-40 w-full bg-gray-100 p-4 rounded-lg ${clickedButtons.includes(`${category}-${difficulty}-${questionIndex}`) ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        className={`cursor-pointer hover:bg-gray-200 p-2 rounded-lg flex justify-center items-center h-40 w-full bg-gray-100 p-4 rounded-lg ${
+                          clickedButtons.includes(
+                            `${category}-${difficulty}-${questionIndex}`
+                          )
+                            ? 'opacity-50 cursor-not-allowed'
+                            : ''
+                        }`}
                         onClick={() =>
                           handleQuestionClick(
                             category,
@@ -76,7 +96,9 @@ const JeopardyPage = (props) => {
                             questionIndex
                           )
                         }
-                        disabled={clickedButtons.includes(`${category}-${difficulty}-${questionIndex}`)}
+                        disabled={clickedButtons.includes(
+                          `${category}-${difficulty}-${questionIndex}`
+                        )}
                       >
                         {getPointValue(difficulty)}
                       </button>
