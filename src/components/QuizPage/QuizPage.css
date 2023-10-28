@@ -1,0 +1,9 @@
+@media (min-width: 767px) {
+    .quiz-container {
+      width: 800px;
+    }
+    
+    .quiz-button {
+        max-width: 800px !important;
+    }
+  }

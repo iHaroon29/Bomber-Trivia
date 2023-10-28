@@ -62,22 +62,26 @@ const QuizPage = () => {
           <h2 className='text-center'>Difficulty - {selectedQuestion.difficulty}</h2>
         </div>
       </div>
-      <h2 className='text-center font-bold text-2xl px-4 py-6 text-white'>{selectedQuestion.questionData.Question}</h2>
-      <div className="flex flex-col gap-4 px-4 flex-grow">
-        {selectedQuestion.questionData.MultipleChoice.map((answer, index) => (
-          <button key={index} className={`bg-gray-100 p-2 rounded-lg flex justify-center items-center h-16 ${selectedAnswer === answer && selected ? 'bg-blue-200' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`} onClick={() => handleAnswerClick(answer)} disabled={disabled}>
-            <div className="text-center">{answer}</div>
-          </button>
-        ))}
-      </div>
-      {message && (
-        <div className="fixed bottom-0 w-full flex flex-col items-center px-4 py-8">
-          <p className="text-xl pb-20 text-white">{message}</p>
-          <button className={`bg-green-700 text-white p-2 rounded-lg flex justify-center items-center h-16 text-black font-bold w-full`} onClick={handleBackClick}>
-            BACK TO TRIVIA BOARD
-          </button>
+      <div className='flex justify-center'>
+        <div className=''>
+          <h2 className='text-center font-bold text-2xl px-4 py-6 text-white quiz-container'>{selectedQuestion.questionData.Question}</h2>
+          <div className="flex flex-col gap-4 px-4 flex-grow">
+            {selectedQuestion.questionData.MultipleChoice.map((answer, index) => (
+              <button key={index} className={`bg-gray-100 p-2 rounded-lg flex justify-center items-center h-16 ${selectedAnswer === answer && selected ? 'bg-blue-200' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`} onClick={() => handleAnswerClick(answer)} disabled={disabled}>
+                <div className="text-center">{answer}</div>
+              </button>
+            ))}
+          </div>
         </div>
-      )}
+        {message && (
+          <div className="fixed bottom-0 w-full flex flex-col items-center px-4 py-8">
+            <p className="text-xl pb-20 text-white">{message}</p>
+            <button className={`bg-green-700 text-white p-2 rounded-lg flex justify-center items-center h-16 text-black font-bold w-full`} style={{maxWidth: 600}} onClick={handleBackClick}>
+              BACK TO TRIVIA BOARD
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
