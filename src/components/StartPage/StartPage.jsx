@@ -4,7 +4,10 @@ import { useNavigate } from 'react-router-dom'
 import { postData } from '../../utils/axios_utils'
 import './StartPage.css'
 
+import { useErrorBoundary } from 'react-error-boundary'
+
 const StartPage = (props) => {
+  const { showBoundary } = useErrorBoundary()
   const [generatedText, setGeneratedText] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const inputRef = useRef(null)
@@ -35,11 +38,10 @@ const StartPage = (props) => {
         props.setAuth(true)
         navigate('/jeopardy')
       } else {
-        setGeneratedText('Error: Could not generate text')
+        throw new Error('Error:Could not generate text')
       }
     } catch (error) {
-      console.error(error)
-      setGeneratedText('Error: Could not generate text')
+      showBoundary(error.message)
     }
 
     setIsLoading(false)
@@ -47,18 +49,21 @@ const StartPage = (props) => {
 
   return (
     <div className='flex flex-col h-screen justify-center items-center p-8'>
-      <h1 className='text-4xl font-bold text-center mb-16 text-white'>Personalized Trivia</h1>
+      <h1 className='text-4xl font-bold text-center mb-16 text-white'>
+        Personalized Trivia
+      </h1>
       <div className='bg-gray-100 rounded mb-8 p-4 container-width'>
         <h2 className='text-lg text-center'>
-          Get ready for <strong>Personalized Trivia</strong>! The personalized Trivia game inspired by Jeopardy but with a
-          twist 💣 👻 🔧
+          Get ready for <strong>Personalized Trivia</strong>! The personalized
+          Trivia game inspired by Jeopardy but with a twist 💣 👻 🔧
         </h2>
-      {/* </div> */}
-      {/* <div className='bg-gray-100 rounded mb-8 p-2'> */}
-      <h2 className='text-lg text-center pt-8'>
-        <strong>Beware of the hidden bombs</strong>. If you stumble across one and answer incorrectly, you will lose the game.
-      </h2>
-      {/* <h2 className='text-lg text-center pt-8'>
+        {/* </div> */}
+        {/* <div className='bg-gray-100 rounded mb-8 p-2'> */}
+        <h2 className='text-lg text-center pt-8'>
+          <strong>Beware of the hidden bombs</strong>. If you stumble across one
+          and answer incorrectly, you will lose the game.
+        </h2>
+        {/* <h2 className='text-lg text-center pt-8'>
         To play, enter a topic and press <strong>PLAY</strong>
       </h2> */}
       </div>
@@ -91,7 +96,7 @@ const StartPage = (props) => {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default StartPage

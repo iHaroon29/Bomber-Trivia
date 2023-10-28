@@ -8,17 +8,17 @@ const QuizPage = () => {
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [message, setMessage] = useState(null)
   const navigate = useNavigate()
-  const [disabled, setDisabled] = useState(false);
-  const [selected, setSelected] = useState(false);
-  const [gameOver, setGameOver] = useState(false);
-  const { playerScore, setPlayerScore } = useContext(GlobalPlayerContext);
-  const [isLastQuestion, setIsLastQuestion] = useState(false);
+  const [disabled, setDisabled] = useState(false)
+  const [selected, setSelected] = useState(false)
+  const [gameOver, setGameOver] = useState(false)
+  const { playerScore, setPlayerScore } = useContext(GlobalPlayerContext)
+  const [isLastQuestion, setIsLastQuestion] = useState(false)
 
   const quizDataString = useContext(QuizDataContext)
   const quizData = JSON.parse(quizDataString.trim())
 
   if (quizData && quizData.questions && quizData.questions.length === 1) {
-    setIsLastQuestion(true);
+    setIsLastQuestion(true)
   }
 
   useEffect(() => {
@@ -27,17 +27,17 @@ const QuizPage = () => {
   }, [selectedQuestion])
 
   const handleAnswerClick = (answer) => {
-    setSelectedAnswer(answer);
-    setDisabled(true);
-    setSelected(true);
+    setSelectedAnswer(answer)
+    setDisabled(true)
+    setSelected(true)
     if (answer === selectedQuestion.questionData.Answer) {
-      const pointValue = getPointValue(selectedQuestion.difficulty);
-      setPlayerScore((prevScore) => prevScore + pointValue);
+      const pointValue = getPointValue(selectedQuestion.difficulty)
+      setPlayerScore((prevScore) => prevScore + pointValue)
       setMessage('Correct!')
     } else {
       if (selectedQuestion.isBomb) {
-        setMessage('Game over! You answered a bomb question incorrectly.');
-        setGameOver(true);
+        setMessage('Game over! You answered a bomb question incorrectly.')
+        setGameOver(true)
       } else {
         setMessage('Incorrect!')
       }
@@ -49,8 +49,8 @@ const QuizPage = () => {
   }
 
   const handleEndGameClick = () => {
-    setPlayerScore(0);
-    navigate('/');
+    setPlayerScore(0)
+    navigate('/')
   }
 
   const getPointValue = (difficulty) => {
@@ -72,37 +72,59 @@ const QuizPage = () => {
 
   return (
     <div>
-      <h1 className='text-center py-6 font-bold text-3xl text-white'>Personalized Trivia</h1>
+      <h1 className='text-center py-6 font-bold text-3xl text-white'>
+        Personalized Trivia
+      </h1>
       <div className='bg-black py-1'>
         <div className='flex flex-col justify-center text-white'>
           <h2 className='text-center'>{selectedQuestion.category}</h2>
-          <h2 className='text-center'>Difficulty - {selectedQuestion.difficulty}</h2>
+          <h2 className='text-center'>
+            Difficulty - {selectedQuestion.difficulty}
+          </h2>
         </div>
       </div>
       <div className='flex justify-center quiz-page'>
         <div style={{ width: 632 }}>
           <h2 className='text-center font-bold text-2xl px-4 py-6 text-white quiz-container'>
             {selectedQuestion.isBomb ? (
-              <span className="text-red-500">BOMB QUESTION: </span>
+              <span className='text-red-500'>BOMB QUESTION: </span>
             ) : null}
             {selectedQuestion.questionData.Question}
-          </h2>          <div className="flex flex-col gap-4 px-4 flex-grow">
-            {selectedQuestion.questionData.MultipleChoice.map((answer, index) => (
-              <button key={index} className={`bg-gray-100 p-2 rounded-lg flex justify-center items-center h-16 ${selectedAnswer === answer && selected ? 'bg-blue-200' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`} onClick={() => handleAnswerClick(answer)} disabled={disabled}>
-                <div className="text-center">{answer}</div>
-              </button>
-            ))}
+          </h2>{' '}
+          <div className='flex flex-col gap-4 px-4 flex-grow'>
+            {selectedQuestion.questionData.MultipleChoice.map(
+              (answer, index) => (
+                <button
+                  key={index}
+                  className={`bg-gray-100 p-2 rounded-lg flex justify-center items-center h-16 ${
+                    selectedAnswer === answer && selected ? 'bg-blue-200' : ''
+                  } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  onClick={() => handleAnswerClick(answer)}
+                  disabled={disabled}
+                >
+                  <div className='text-center'>{answer}</div>
+                </button>
+              )
+            )}
           </div>
         </div>
         {message && (
-          <div className="fixed bottom-0 w-full flex flex-col items-center px-4 py-8">
-            <p className="text-xl pb-20 text-white">{message}</p>
-            {(isLastQuestion || gameOver) ? (
-              <button className={`bg-red-700 text-white p-2 rounded-lg flex justify-center items-center h-16 text-black font-bold w-full`} style={{ maxWidth: 600 }} onClick={handleEndGameClick}>
+          <div className='fixed bottom-0 w-full flex flex-col items-center px-4 py-8'>
+            <p className='text-xl pb-20 text-white'>{message}</p>
+            {isLastQuestion || gameOver ? (
+              <button
+                className={`bg-red-700 text-white p-2 rounded-lg flex justify-center items-center h-16 text-black font-bold w-full`}
+                style={{ maxWidth: 600 }}
+                onClick={handleEndGameClick}
+              >
                 BACK TO START
               </button>
             ) : (
-              <button className={`bg-green-700 text-white p-2 rounded-lg flex justify-center items-center h-16 text-black font-bold w-full`} style={{ maxWidth: 600 }} onClick={handleBackClick}>
+              <button
+                className={`bg-green-700 text-white p-2 rounded-lg flex justify-center items-center h-16 text-black font-bold w-full`}
+                style={{ maxWidth: 600 }}
+                onClick={handleBackClick}
+              >
                 BACK TO TRIVIA BOARD
               </button>
             )}

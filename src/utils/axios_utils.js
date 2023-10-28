@@ -11,11 +11,7 @@ const axiosInstance = axios.create({
 })
 
 const postData = async (url, data) => {
-  try {
-    return await axiosInstance.post(url, data)
-  } catch (e) {
-    console.log(e.message)
-  }
+  return await axiosInstance.post(url, data)
 }
 
 const getData = async (url) => {
