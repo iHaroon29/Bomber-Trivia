@@ -19,6 +19,7 @@ export default function App() {
   const [bombIndexes, setBombIndexes] = useState([])
   const [mysteryBoxesIndexes, setMysteryBoxesIndexes] = useState([])
   const [auth, setAuth] = useState(false)
+  const [clickedButtons, setClickedButtons] = useState([]);
 
   return (
     <BrowserRouter>
@@ -33,6 +34,8 @@ export default function App() {
           bombIndexes,
           setBombIndexes,
           mysteryBoxesIndexes,
+          clickedButtons,
+          setClickedButtons,
         }}
       >
         <AuthContext.Provider value={auth}>
