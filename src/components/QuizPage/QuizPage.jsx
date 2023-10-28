@@ -75,7 +75,7 @@ const QuizPage = () => {
 
   return (
     <div>
-      <h1 className='text-center py-6 font-bold text-3xl text-white'>Spooky Trivia</h1>
+      <h1 className='text-center py-6 font-bold text-3xl text-white'>Personalized Trivia</h1>
       <div className='bg-black py-1'>
         <div className='flex flex-col justify-center text-white'>
           <h2 className='text-center'>{selectedQuestion.category}</h2>
