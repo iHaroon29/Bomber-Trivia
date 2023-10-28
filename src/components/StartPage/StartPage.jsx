@@ -47,10 +47,10 @@ const StartPage = (props) => {
 
   return (
     <div className='flex flex-col h-screen justify-center items-center p-8'>
-      <h1 className='text-4xl font-bold text-center mb-16 text-white'>Spooky Trivia</h1>
+      <h1 className='text-4xl font-bold text-center mb-16 text-white'>Personalized Trivia</h1>
       <div className='bg-gray-100 rounded mb-8 p-4 container-width'>
         <h2 className='text-lg text-center'>
-          Get ready for <strong>Spooky Trivia</strong>! The personalized Trivia game inspired by Jeopardy but with a
+          Get ready for <strong>Personalized Trivia</strong>! The personalized Trivia game inspired by Jeopardy but with a
           twist 💣 👻 🔧
         </h2>
       {/* </div> */}

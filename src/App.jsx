@@ -52,6 +52,7 @@ export default function App() {
                       setBombs={setBombs}
                       setBombIndexes={setBombIndexes}
                       setMysteryBoxes={setMysteryBoxes}
+                      setQuizData={setQuizData}
                     />
                   }
                 />
