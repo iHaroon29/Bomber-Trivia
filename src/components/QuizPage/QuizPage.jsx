@@ -1,17 +1,29 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { GlobalPlayerContext, QuizDataContext } from '../../utils/app_context'
 
-const QuizPage = ({ setPlayerScore }) => {
+const QuizPage = () => {
   const selectedQuestion = useLocation().state
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [message, setMessage] = useState(null)
   const navigate = useNavigate()
   const [disabled, setDisabled] = useState(false);
   const [selected, setSelected] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+  const { playerScore, setPlayerScore } = useContext(GlobalPlayerContext);
+  const [isLastQuestion, setIsLastQuestion] = useState(false);
+
+  const quizDataString = useContext(QuizDataContext)
+  const quizData = JSON.parse(quizDataString.trim())
+
+  if (quizData && quizData.questions && quizData.questions.length === 1) {
+    setIsLastQuestion(true);
+  }
 
   useEffect(() => {
     console.log(selectedQuestion)
+    console.log('isBomb:', selectedQuestion.isBomb)
   }, [selectedQuestion])
 
   const handleAnswerClick = (answer) => {
@@ -19,17 +31,26 @@ const QuizPage = ({ setPlayerScore }) => {
     setDisabled(true);
     setSelected(true);
     if (answer === selectedQuestion.questionData.Answer) {
-      setPlayerScore(
-        (prev) => prev + getPointValue(selectedQuestion.difficulty)
-      )
+      const pointValue = getPointValue(selectedQuestion.difficulty);
+      setPlayerScore((prevScore) => prevScore + pointValue);
       setMessage('Correct!')
     } else {
-      setMessage('Incorrect!')
+      if (selectedQuestion.isBomb) {
+        setMessage('Game over! You answered a bomb question incorrectly.');
+        setGameOver(true);
+      } else {
+        setMessage('Incorrect!')
+      }
     }
   }
 
   const handleBackClick = () => {
     navigate('/jeopardy')
+  }
+
+  const handleEndGameClick = () => {
+    setPlayerScore(0);
+    navigate('/');
   }
 
   const getPointValue = (difficulty) => {
@@ -45,6 +66,10 @@ const QuizPage = ({ setPlayerScore }) => {
     }
   }
 
+  useEffect(() => {
+    console.log('Player score:', playerScore)
+  }, [playerScore])
+
   return (
     <div>
       <h1 className='text-center py-6 font-bold text-3xl text-white'>Personalized Trivia</h1>
@@ -54,22 +79,36 @@ const QuizPage = ({ setPlayerScore }) => {
           <h2 className='text-center'>Difficulty - {selectedQuestion.difficulty}</h2>
         </div>
       </div>
-      <h2 className='text-center font-bold text-2xl px-4 py-6 text-white'>{selectedQuestion.questionData.Question}</h2>
-      <div className="flex flex-col gap-4 px-4 flex-grow">
-        {selectedQuestion.questionData.MultipleChoice.map((answer, index) => (
-          <button key={index} className={`bg-gray-100 p-2 rounded-lg flex justify-center items-center h-16 ${selectedAnswer === answer && selected ? 'bg-blue-200' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`} onClick={() => handleAnswerClick(answer)} disabled={disabled}>
-            <div className="text-center">{answer}</div>
-          </button>
-        ))}
-      </div>
-      {message && (
-        <div className="fixed bottom-0 w-full flex flex-col items-center px-4 py-8">
-          <p className="text-xl pb-20 text-white">{message}</p>
-          <button className={`bg-green-700 text-white p-2 rounded-lg flex justify-center items-center h-16 text-black font-bold w-full`} onClick={handleBackClick}>
-            BACK TO TRIVIA BOARD
-          </button>
+      <div className='flex justify-center quiz-page'>
+        <div style={{ width: 632 }}>
+          <h2 className='text-center font-bold text-2xl px-4 py-6 text-white quiz-container'>
+            {selectedQuestion.isBomb ? (
+              <span className="text-red-500">BOMB QUESTION: </span>
+            ) : null}
+            {selectedQuestion.questionData.Question}
+          </h2>          <div className="flex flex-col gap-4 px-4 flex-grow">
+            {selectedQuestion.questionData.MultipleChoice.map((answer, index) => (
+              <button key={index} className={`bg-gray-100 p-2 rounded-lg flex justify-center items-center h-16 ${selectedAnswer === answer && selected ? 'bg-blue-200' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`} onClick={() => handleAnswerClick(answer)} disabled={disabled}>
+                <div className="text-center">{answer}</div>
+              </button>
+            ))}
+          </div>
         </div>
-      )}
+        {message && (
+          <div className="fixed bottom-0 w-full flex flex-col items-center px-4 py-8">
+            <p className="text-xl pb-20 text-white">{message}</p>
+            {(isLastQuestion || gameOver) ? (
+              <button className={`bg-red-700 text-white p-2 rounded-lg flex justify-center items-center h-16 text-black font-bold w-full`} style={{ maxWidth: 600 }} onClick={handleEndGameClick}>
+                BACK TO START
+              </button>
+            ) : (
+              <button className={`bg-green-700 text-white p-2 rounded-lg flex justify-center items-center h-16 text-black font-bold w-full`} style={{ maxWidth: 600 }} onClick={handleBackClick}>
+                BACK TO TRIVIA BOARD
+              </button>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   )
 }

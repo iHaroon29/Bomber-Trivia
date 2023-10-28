@@ -20,17 +20,23 @@ export default function App() {
   const [bombIndexes, setBombIndexes] = useState([])
   const [mysteryBoxesIndexes, setMysteryBoxesIndexes] = useState([])
   const [auth, setAuth] = useState(false)
+  const [clickedButtons, setClickedButtons] = useState([]);
 
   return (
     <BrowserRouter>
       <GlobalPlayerContext.Provider
         value={{
           playerScore,
+          setPlayerScore,
           bombs,
+          setBombs,
           mysteryBoxes,
           bombDiffusers,
           bombIndexes,
+          setBombIndexes,
           mysteryBoxesIndexes,
+          clickedButtons,
+          setClickedButtons,
         }}
       >
         <AuthContext.Provider value={auth}>
@@ -48,7 +54,9 @@ export default function App() {
                   element={
                     <JeopardyPage
                       setBombs={setBombs}
+                      setBombIndexes={setBombIndexes}
                       setMysteryBoxes={setMysteryBoxes}
+                      setQuizData={setQuizData}
                     />
                   }
                 />

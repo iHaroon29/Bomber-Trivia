@@ -16,3 +16,5 @@
         transform: rotate(360deg);
     }
 }
+
+.container-width {max-width:512px}
