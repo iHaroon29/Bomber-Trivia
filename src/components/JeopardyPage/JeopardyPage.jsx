@@ -6,8 +6,12 @@ const JeopardyPage = (props) => {
   const [selectedQuestion, setSelectedQuestion] = useState({})
   const navigate = useNavigate()
   const quizDataString = useContext(QuizDataContext)
-  const quizData = JSON.parse(quizDataString.trim())
+  const quizData = JSON.parse(quizDataString) // .trim()might be needed.
   const { playerScore, setPlayerScore, bombIndexes, setBombIndexes } = useContext(GlobalPlayerContext);
+
+  useEffect(() => {
+    console.log(quizDataString);
+  }, [quizDataString])
 
   useEffect(() => {
     if (!bombIndexes.length) {
