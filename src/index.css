@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 body {
-  /* https://unsplash.com/photos/desert-at-night-a2kD4b0KK4s */
-  /* background-image: url('./assets/bg-space3.jpeg'); */
-  background-color: #222222;
+  /* https://unsplash.com/photos/the-night-sky-with-stars-above-a-mountain-range-b1fuDczpg9c */
+  background-image: url('./assets/bg-black4-compressed.jpeg');
+  /* background-color: #222222; */
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;

@@ -17,9 +17,10 @@ const JeopardyPage = (props) => {
     console.log(bombIndexes);
   }, [bombIndexes, setBombIndexes])
 
-  const handleQuestionClick = (category, difficulty, questionData) => {
+  const handleQuestionClick = (category, difficulty, questionData, index, questionIndex) => {
     setSelectedQuestion({ category, difficulty, questionData })
-    navigate('/quiz', { state: { category, difficulty, questionData } })
+    const isBomb = bombIndexes.includes(index * 3 + questionIndex);
+    navigate('/quiz', { state: { category, difficulty, questionData, isBomb } })
   }
 
   const getPointValue = (difficulty) => {
@@ -37,7 +38,7 @@ const JeopardyPage = (props) => {
 
   return (
     <div>
-      <h1 className='text-center py-6 font-bold text-3xl text-white'>Personalized Trivia</h1>
+      <h1 className='text-center py-6 font-bold text-3xl text-white'>Spooky Trivia</h1>
       <div className='bg-black py-1'>
         <div className='flex flex-col justify-center text-white'>
           <h2 className='text-center py-3'>Points: {playerScore} | Bombs: {bombIndexes.length} | Diffusers: { } </h2>
@@ -59,15 +60,17 @@ const JeopardyPage = (props) => {
                           handleQuestionClick(
                             category,
                             difficulty,
-                            questions[difficulty]
+                            questions[difficulty],
+                            index,
+                            questionIndex
                           )
                         }
                       >
                         {getPointValue(difficulty)}
                       </button>
-                      {bombIndexes.includes(index * 3 + questionIndex) && (
+                      {/* {bombIndexes.includes(index * 3 + questionIndex) && (
                         <div className="text-center text-red-500 font-bold">BOMB!</div>
-                      )}
+                      )} */}
                     </div>
                   ))}
                 </div>
