@@ -9,7 +9,7 @@ const JeopardyPage = (props) => {
   const quizData = JSON.parse(quizDataString.trim())
   const { playerScore, setPlayerScore } = useContext(GlobalPlayerContext);
 
-  useEffect(() => {}, [quizData])
+  useEffect(() => { }, [quizData])
 
   const handleQuestionClick = (category, difficulty, questionData) => {
     setSelectedQuestion({ category, difficulty, questionData })
@@ -34,34 +34,38 @@ const JeopardyPage = (props) => {
       <h1 className='text-center py-6 font-bold text-3xl text-white'>Personalized Trivia</h1>
       <div className='bg-black py-1'>
         <div className='flex flex-col justify-center text-white'>
-          <h2 className='text-center py-3'>Score: {playerScore} | Bombs: {} | Diffusers: {} </h2>
+          <h2 className='text-center py-3'>Score: {playerScore} | Bombs: { } | Diffusers: { } </h2>
           {/* <h2 className='text-center'>xx</h2> */}
         </div>
       </div>
-      <div className='grid grid-cols-2 gap-4 px-4'>
-        {Object.entries(quizData).map(([category, questions]) => (
-          <div key={category}>
-            <h2 className='text-lg font-bold mb-2 text-center text-white pt-4'>{category}</h2>
-            <div>
-              {Object.keys(questions).map((difficulty) => (
-                <div key={difficulty} className='mb-4'>
-                  <button
-                    className='cursor-pointer hover:bg-gray-200 p-2 rounded-lg flex justify-center items-center h-40 w-full bg-gray-100 p-4 rounded-lg'
-                    onClick={() =>
-                      handleQuestionClick(
-                        category,
-                        difficulty,
-                        questions[difficulty]
-                      )
-                    }
-                  >
-                    {getPointValue(difficulty)}
-                  </button>
+      <div className='flex justify-center'>
+        <div className='board-container'>
+          <div className='grid grid-cols-2 gap-4 px-4'>
+            {Object.entries(quizData).map(([category, questions]) => (
+              <div key={category}>
+                <h2 className='text-lg font-bold mb-2 text-center text-white pt-4'>{category}</h2>
+                <div>
+                  {Object.keys(questions).map((difficulty) => (
+                    <div key={difficulty} className='mb-4'>
+                      <button
+                        className='cursor-pointer hover:bg-gray-200 p-2 rounded-lg flex justify-center items-center h-40 w-full bg-gray-100 p-4 rounded-lg'
+                        onClick={() =>
+                          handleQuestionClick(
+                            category,
+                            difficulty,
+                            questions[difficulty]
+                          )
+                        }
+                      >
+                        {getPointValue(difficulty)}
+                      </button>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </div>
   )
