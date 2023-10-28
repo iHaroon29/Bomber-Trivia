@@ -10,6 +10,7 @@ const JeopardyPage = (props) => {
   const { playerScore, setPlayerScore, bombIndexes, setBombIndexes } =
     useContext(GlobalPlayerContext)
   const { clickedButtons, setClickedButtons } = useContext(GlobalPlayerContext)
+  const [isLastQuestion, setIsLastQuestion] = useState(false)
 
   useEffect(() => {
     console.log(quizDataString)
@@ -25,6 +26,9 @@ const JeopardyPage = (props) => {
 
   useEffect(() => {
     console.log('clickedButtons:', clickedButtons)
+    if (clickedButtons.length === 5) {
+      setIsLastQuestion(true)
+    }
   }, [clickedButtons])
 
   const handleQuestionClick = (
@@ -36,7 +40,7 @@ const JeopardyPage = (props) => {
   ) => {
     setSelectedQuestion({ category, difficulty, questionData })
     const isBomb = bombIndexes.includes(index * 3 + questionIndex)
-    navigate('/quiz', { state: { category, difficulty, questionData, isBomb } })
+    navigate('/quiz', { state: { category, difficulty, questionData, isBomb, isLastQuestion } })
     setClickedButtons((prevClickedButtons) => [
       ...prevClickedButtons,
       `${category}-${difficulty}-${questionIndex}`,

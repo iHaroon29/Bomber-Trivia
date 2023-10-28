@@ -12,14 +12,14 @@ const QuizPage = () => {
   const [selected, setSelected] = useState(false)
   const [gameOver, setGameOver] = useState(false)
   const { playerScore, setPlayerScore } = useContext(GlobalPlayerContext)
-  const [isLastQuestion, setIsLastQuestion] = useState(false)
+  const [isLastQuestion, setIsLastQuestion] = useState(selectedQuestion.isLastQuestion)
 
   const quizDataString = useContext(QuizDataContext)
   const quizData = JSON.parse(quizDataString.trim())
 
-  if (quizData && quizData.questions && quizData.questions.length === 1) {
-    setIsLastQuestion(true)
-  }
+  useEffect(() => {
+    console.log('isLastQuestion:', isLastQuestion)
+  }, [isLastQuestion])
 
   useEffect(() => {
     console.log(selectedQuestion)
@@ -33,10 +33,18 @@ const QuizPage = () => {
     if (answer === selectedQuestion.questionData.Answer) {
       const pointValue = getPointValue(selectedQuestion.difficulty)
       setPlayerScore((prevScore) => prevScore + pointValue)
-      setMessage('Correct!')
+      if (isLastQuestion) {
+        setMessage(`Correct! You've completed the quiz! Your final score is ${playerScore} points.`)
+        setGameOver(true)
+      } else {
+        setMessage('Correct!')
+      }
     } else {
       if (selectedQuestion.isBomb) {
         setMessage('Game over! You answered a bomb question incorrectly.')
+        setGameOver(true)
+      } else if (isLastQuestion) {
+        setMessage(`Incorrect! You've completed the quiz! Your final score is ${playerScore} points.`)
         setGameOver(true)
       } else {
         setMessage('Incorrect!')
@@ -110,10 +118,10 @@ const QuizPage = () => {
         </div>
         {message && (
           <div className='fixed bottom-0 w-full flex flex-col items-center px-4 py-8'>
-            <p className='text-xl pb-20 text-white'>{message}</p>
+            <p className='text-xl pb-20 text-white text-center'>{message}</p>
             {isLastQuestion || gameOver ? (
               <button
-                className={`bg-red-700 text-white p-2 rounded-lg flex justify-center items-center h-16 text-black font-bold w-full`}
+                className={`bg-green-700 text-white p-2 rounded-lg flex justify-center items-center h-16 text-black font-bold w-full`}
                 style={{ maxWidth: 600 }}
                 onClick={handleEndGameClick}
               >

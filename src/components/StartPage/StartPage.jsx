@@ -55,7 +55,7 @@ const StartPage = (props) => {
       <div className='bg-gray-100 rounded mb-8 p-4 container-width'>
         <h2 className='text-lg text-center'>
           Get ready for <strong>Personalized Trivia</strong>! The personalized
-          Trivia game inspired by Jeopardy but with a twist 💣 👻 🔧
+          Trivia game inspired by Jeopardy but with a twist 💣 🔧
         </h2>
         {/* </div> */}
         {/* <div className='bg-gray-100 rounded mb-8 p-2'> */}
