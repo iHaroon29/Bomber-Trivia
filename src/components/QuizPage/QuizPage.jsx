@@ -12,9 +12,14 @@ const QuizPage = () => {
   const [selected, setSelected] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const { playerScore, setPlayerScore } = useContext(GlobalPlayerContext);
+  const [isLastQuestion, setIsLastQuestion] = useState(false);
 
   const quizDataString = useContext(QuizDataContext)
   const quizData = JSON.parse(quizDataString.trim())
+
+  if (quizData && quizData.questions && quizData.questions.length === 1) {
+    setIsLastQuestion(true);
+  }
 
   useEffect(() => {
     console.log(selectedQuestion)
@@ -44,16 +49,8 @@ const QuizPage = () => {
   }
 
   const handleEndGameClick = () => {
+    setPlayerScore(0);
     navigate('/');
-  }
-
-  const handleNextClick = () => {
-    setSelectedAnswer('');
-    setDisabled(false);
-    setSelected(false);
-    setMessage('');
-    const { category, difficulty, questionData } = getRandomQuestion(selectedQuestion.questionData.Category, selectedQuestion.difficulty);
-    setSelectedQuestion({ category, difficulty, questionData });
   }
 
   const getPointValue = (difficulty) => {
@@ -100,7 +97,7 @@ const QuizPage = () => {
         {message && (
           <div className="fixed bottom-0 w-full flex flex-col items-center px-4 py-8">
             <p className="text-xl pb-20 text-white">{message}</p>
-            {gameOver ? (
+            {(isLastQuestion || gameOver) ? (
               <button className={`bg-red-700 text-white p-2 rounded-lg flex justify-center items-center h-16 text-black font-bold w-full`} style={{ maxWidth: 600 }} onClick={handleEndGameClick}>
                 BACK TO START
               </button>
