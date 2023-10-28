@@ -62,8 +62,8 @@ const QuizPage = () => {
           <h2 className='text-center'>Difficulty - {selectedQuestion.difficulty}</h2>
         </div>
       </div>
-      <div className='flex justify-center'>
-        <div className=''>
+      <div className='flex justify-center quiz-page'>
+        <div style={{width: 632}}>
           <h2 className='text-center font-bold text-2xl px-4 py-6 text-white quiz-container'>{selectedQuestion.questionData.Question}</h2>
           <div className="flex flex-col gap-4 px-4 flex-grow">
             {selectedQuestion.questionData.MultipleChoice.map((answer, index) => (

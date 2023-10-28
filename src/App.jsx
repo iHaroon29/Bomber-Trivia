@@ -28,9 +28,11 @@ export default function App() {
           playerScore,
           setPlayerScore,
           bombs,
+          setBombs,
           mysteryBoxes,
           bombDiffusers,
           bombIndexes,
+          setBombIndexes,
           mysteryBoxesIndexes,
         }}
       >
@@ -49,6 +51,7 @@ export default function App() {
                   element={
                     <JeopardyPage
                       setBombs={setBombs}
+                      setBombIndexes={setBombIndexes}
                       setMysteryBoxes={setMysteryBoxes}
                     />
                   }
