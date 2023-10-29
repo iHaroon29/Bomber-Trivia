@@ -18,3 +18,10 @@
 }
 
 .container-width {max-width:512px}
+
+
+@media (max-width: 767px) {
+    .heading1 {
+        /* margin-top: -80px; */
+    }
+  }
