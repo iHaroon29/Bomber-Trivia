@@ -15,7 +15,7 @@ const JeopardyPage = (props) => {
   const divRef = useRef(null)
 
   useEffect(() => {
-    console.log(quizDataString)
+    // console.log(quizDataString)
   }, [quizDataString])
 
   useEffect(() => {
@@ -23,11 +23,11 @@ const JeopardyPage = (props) => {
       const randomIndex = Math.floor(Math.random() * 6)
       setBombIndexes([randomIndex])
     }
-    console.log(bombIndexes)
+    // console.log(bombIndexes)
   }, [bombIndexes, setBombIndexes])
 
   useEffect(() => {
-    console.log('clickedButtons:', clickedButtons)
+    // console.log('clickedButtons:', clickedButtons)
     if (clickedButtons.length === 5) {
       setIsLastQuestion(true)
     }
@@ -58,7 +58,7 @@ const JeopardyPage = (props) => {
       ...prevClickedButtons,
       `${category}-${difficulty}-${questionIndex}`,
     ])
-    console.log('clickedButtons:', clickedButtons)
+    // console.log('clickedButtons:', clickedButtons)
   }
 
   const getPointValue = (difficulty) => {
@@ -97,7 +97,7 @@ const JeopardyPage = (props) => {
                 </h2>
                 <div className='flex-grow'></div>
                 </div>
-                <div>
+                <div className='mb-8'>
                   {Object.keys(questions).map((difficulty, questionIndex) => (
                     <div key={difficulty} className='mb-4'>
                       <button
