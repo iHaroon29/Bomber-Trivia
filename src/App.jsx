@@ -45,6 +45,7 @@ export default function App() {
           bombIndexes,
           setBombIndexes,
           mysteryBoxesIndexes,
+          setMysteryBoxesIndexes,
           clickedButtons,
           setClickedButtons,
           questionsAnswered,
@@ -72,6 +73,7 @@ export default function App() {
                         setBombs={setBombs}
                         setBombIndexes={setBombIndexes}
                         setMysteryBoxes={setMysteryBoxes}
+                        setMysteryBoxesIndexes={setMysteryBoxesIndexes}
                         setQuizData={setQuizData}
                       />
                     }

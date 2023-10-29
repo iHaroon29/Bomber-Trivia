@@ -7,7 +7,7 @@ const JeopardyPage = (props) => {
   const navigate = useNavigate()
   const quizDataString = useContext(QuizDataContext)
   const quizData = JSON.parse(quizDataString) // .trim()might be needed.
-  const { playerScore, setPlayerScore, bombIndexes, setBombIndexes } =
+  const { playerScore, setPlayerScore, bombIndexes, setBombIndexes, mysteryBoxesIndexes, setMysteryBoxesIndexes } =
     useContext(GlobalPlayerContext)
   const { clickedButtons, setClickedButtons } = useContext(GlobalPlayerContext)
   const [isLastQuestion, setIsLastQuestion] = useState(false)
@@ -20,8 +20,14 @@ const JeopardyPage = (props) => {
 
   useEffect(() => {
     if (!bombIndexes.length) {
-      const randomIndex = Math.floor(Math.random() * 6)
-      setBombIndexes([randomIndex])
+      const randomBombIndex = Math.floor(Math.random() * 6)
+      let randomMysteryBoxIndex;
+
+      do {randomMysteryBoxIndex = Math.floor(Math.random() * 6)}
+      while (randomMysteryBoxIndex === randomBombIndex)
+
+      setBombIndexes([randomBombIndex])
+      setMysteryBoxesIndexes([randomMysteryBoxIndex])
     }
     // console.log(bombIndexes)
   }, [bombIndexes, setBombIndexes])
@@ -53,7 +59,8 @@ const JeopardyPage = (props) => {
   ) => {
     setSelectedQuestion({ category, difficulty, questionData })
     const isBomb = bombIndexes.includes(index * 3 + questionIndex)
-    navigate('/quiz', { state: { category, difficulty, questionData, isBomb, isLastQuestion } })
+    const isMysteryBox = mysteryBoxesIndexes.includes(index * 3 + questionIndex)
+    navigate('/quiz', { state: { category, difficulty, questionData, isBomb, isMysteryBox, isLastQuestion } })
     setClickedButtons((prevClickedButtons) => [
       ...prevClickedButtons,
       `${category}-${difficulty}-${questionIndex}`,

@@ -35,13 +35,20 @@ const QuizPage = () => {
     setSelected(true)
     if (answer === selectedQuestion.questionData.Answer) {
       const pointValue = getPointValue(selectedQuestion.difficulty)
-      setPlayerScore((prevScore) => prevScore + pointValue)
       if (isLastQuestion) {
+        setPlayerScore((prevScore) => prevScore + pointValue)
         const finalScore = playerScore + pointValue
         setMessage(`Correct! You've completed the quiz! Your final score is ${finalScore} points.`)
         setGameWin(true)
-      } else {
+      } else if (!isLastQuestion && !selectedQuestion.isMysteryBox) {
+        setPlayerScore((prevScore) => prevScore + pointValue)
         setMessage('Correct!')
+      }
+
+      if (selectedQuestion.isMysteryBox) {
+        const pointValue = getPointValue(selectedQuestion.difficulty)
+        setPlayerScore((prevScore) => prevScore + (pointValue * 2))
+        setMessage(`Correct! You've gained double the points at ${pointValue * 2} points`)
       }
     } else {
       if (selectedQuestion.isBomb) {
@@ -52,6 +59,12 @@ const QuizPage = () => {
         setGameWin(true)
       } else {
         setMessage('Incorrect!')
+      }
+
+      if (selectedQuestion.isMysteryBox) {
+        const pointValue = getPointValue(selectedQuestion.difficulty)
+        setPlayerScore((prevScore) => prevScore - (pointValue * 2))
+        setMessage(`Incorrect! You've lost double the points at ${pointValue * 2} points`)
       }
     }
   }
@@ -102,6 +115,9 @@ const QuizPage = () => {
             {selectedQuestion.isBomb ? (
               <span className='text-red-500'>BOMB QUESTION: </span>
             ) : null}
+            {selectedQuestion.isMysteryBox ? (
+              <span className='text-green-500'>MYSTERY BOX QUESTIONS: </span>
+            ): null}
             {selectedQuestion.questionData.Question}
           </h2>{' '}
           <div className='flex flex-col gap-4 px-4 flex-grow'>
