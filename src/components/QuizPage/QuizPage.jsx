@@ -15,17 +15,18 @@ const QuizPage = () => {
   const [gameWin, setGameWin] = useState(false)
   const { playerScore, setPlayerScore } = useContext(GlobalPlayerContext)
   const [isLastQuestion, setIsLastQuestion] = useState(selectedQuestion.isLastQuestion)
+  const { setClickedButtons } = useContext(GlobalPlayerContext)
 
   const quizDataString = useContext(QuizDataContext)
   const quizData = JSON.parse(quizDataString.trim())
 
   useEffect(() => {
-    console.log('isLastQuestion:', isLastQuestion)
+    // console.log('isLastQuestion:', isLastQuestion)
   }, [isLastQuestion])
 
   useEffect(() => {
-    console.log(selectedQuestion)
-    console.log('isBomb:', selectedQuestion.isBomb)
+    // console.log(selectedQuestion)
+    // console.log('isBomb:', selectedQuestion.isBomb)
   }, [selectedQuestion])
 
   const handleAnswerClick = (answer) => {
@@ -61,6 +62,7 @@ const QuizPage = () => {
 
   const handleEndGameClick = () => {
     setPlayerScore(0)
+    setClickedButtons([])
     navigate('/')
   }
 
@@ -78,7 +80,7 @@ const QuizPage = () => {
   }
 
   useEffect(() => {
-    console.log('Player score:', playerScore)
+    // console.log('Player score:', playerScore)
   }, [playerScore])
 
   return (
