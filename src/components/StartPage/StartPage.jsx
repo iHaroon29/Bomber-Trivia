@@ -48,8 +48,8 @@ const StartPage = (props) => {
   }
 
   return (
-    <div className='flex flex-col h-screen justify-center items-center p-8'>
-      <h1 className='text-4xl font-bold text-center mb-4 text-white'>
+    <div className='flex flex-col h-screen justify-center items-center p-8 justify-start'>
+      <h1 className='text-4xl font-bold text-center mb-4 text-white heading1'>
         Bomber Trivia
       </h1>
       <img src={logo} alt='Logo' style={{ width: '200px', height: '200px' }} className='mb-4' />
