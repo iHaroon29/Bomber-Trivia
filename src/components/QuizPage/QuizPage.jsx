@@ -12,6 +12,7 @@ const QuizPage = () => {
   const [disabled, setDisabled] = useState(false)
   const [selected, setSelected] = useState(false)
   const [gameOver, setGameOver] = useState(false)
+  const [gameWin, setGameWin] = useState(false)
   const { playerScore, setPlayerScore } = useContext(GlobalPlayerContext)
   const [isLastQuestion, setIsLastQuestion] = useState(selectedQuestion.isLastQuestion)
 
@@ -35,8 +36,9 @@ const QuizPage = () => {
       const pointValue = getPointValue(selectedQuestion.difficulty)
       setPlayerScore((prevScore) => prevScore + pointValue)
       if (isLastQuestion) {
-        setMessage(`Correct! You've completed the quiz! Your final score is ${playerScore} points.`)
-        setGameOver(true)
+        const finalScore = playerScore + pointValue
+        setMessage(`Correct! You've completed the quiz! Your final score is ${finalScore} points.`)
+        setGameWin(true)
       } else {
         setMessage('Correct!')
       }
@@ -46,7 +48,7 @@ const QuizPage = () => {
         setGameOver(true)
       } else if (isLastQuestion) {
         setMessage(`Incorrect! You've completed the quiz! Your final score is ${playerScore} points.`)
-        setGameOver(true)
+        setGameWin(true)
       } else {
         setMessage('Incorrect!')
       }
@@ -130,7 +132,7 @@ const QuizPage = () => {
               >
               </Player>
             ) : null}
-            {isLastQuestion ? (
+            {isLastQuestion && gameWin ? (
               <Player
                 autoplay
                 loop
