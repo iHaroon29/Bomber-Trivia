@@ -3,7 +3,6 @@ import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { postData } from '../../utils/axios_utils'
 import './StartPage.css'
-
 import { useErrorBoundary } from 'react-error-boundary'
 
 const StartPage = (props) => {

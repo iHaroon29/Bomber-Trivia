@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, useRef } from 'react'
 import { GlobalPlayerContext, QuizDataContext } from '../../utils/app_context'
 import { useNavigate } from 'react-router-dom'
 
@@ -11,6 +11,8 @@ const JeopardyPage = (props) => {
     useContext(GlobalPlayerContext)
   const { clickedButtons, setClickedButtons } = useContext(GlobalPlayerContext)
   const [isLastQuestion, setIsLastQuestion] = useState(false)
+  const [divHeight, setDivHeight] = useState(0)
+  const divRef = useRef(null)
 
   useEffect(() => {
     console.log(quizDataString)
@@ -30,6 +32,17 @@ const JeopardyPage = (props) => {
       setIsLastQuestion(true)
     }
   }, [clickedButtons])
+
+  useEffect(() => {
+    if (divRef.current) {
+      const h2Tags = divRef.current.querySelectorAll('h2')
+      let maxHeight = 0
+      h2Tags.forEach((h2) => {
+        maxHeight = Math.max(maxHeight, h2.offsetHeight)
+      })
+      setDivHeight(maxHeight + 20)
+    }
+  }, [divRef])
 
   const handleQuestionClick = (
     category,
@@ -77,9 +90,13 @@ const JeopardyPage = (props) => {
           <div className='grid grid-cols-2 gap-4 px-4'>
             {Object.entries(quizData).map(([category, questions], index) => (
               <div key={category}>
-                <h2 className='text-lg font-bold mb-2 text-center text-white pt-4'>
+                <div className='flex flex-col' style={{height: 110}} ref={divRef}>
+                <div className='flex-grow'></div>
+                <h2 className='text-lg font-bold mb-2 text-center text-white pt-4' style={{ alignItems: 'center' }}>
                   {category}
                 </h2>
+                <div className='flex-grow'></div>
+                </div>
                 <div>
                   {Object.keys(questions).map((difficulty, questionIndex) => (
                     <div key={difficulty} className='mb-4'>
