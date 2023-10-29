@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { postData } from '../../utils/axios_utils'
 import './StartPage.css'
 import { useErrorBoundary } from 'react-error-boundary'
+import logo from '../../assets/logo-transparent.png';
 
 const StartPage = (props) => {
   const { showBoundary } = useErrorBoundary()
@@ -48,9 +49,10 @@ const StartPage = (props) => {
 
   return (
     <div className='flex flex-col h-screen justify-center items-center p-8'>
-      <h1 className='text-4xl font-bold text-center mb-16 text-white'>
+      <h1 className='text-4xl font-bold text-center mb-4 text-white'>
         Personalized Trivia
       </h1>
+      <img src={logo} alt='Logo' style={{ width: '300px', height: '300px' }} className='mb-4' />
       <div className='bg-gray-100 rounded mb-8 p-4 container-width'>
         <h2 className='text-lg text-center'>
           Get ready for <strong>Personalized Trivia</strong>! The personalized
