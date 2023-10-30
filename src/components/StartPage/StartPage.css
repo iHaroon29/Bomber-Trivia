@@ -1,0 +1,27 @@
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-top: 4px solid #ffffff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.container-width {max-width:512px}
+
+
+@media (max-width: 767px) {
+    .heading1 {
+        /* margin-top: -80px; */
+    }
+  }

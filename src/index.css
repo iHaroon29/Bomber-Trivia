@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  /* https://unsplash.com/photos/the-night-sky-with-stars-above-a-mountain-range-b1fuDczpg9c */
+  background-image: url('./assets/bg-black4-compressed.jpeg');
+  /* background-color: #222222; */
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+  

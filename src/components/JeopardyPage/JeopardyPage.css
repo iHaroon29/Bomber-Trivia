@@ -1,0 +1,15 @@
+.category-heading2 {
+    min-height: 72px;
+    padding: 16px 0;
+}
+
+.board-container {
+    width: 100% !important;
+}
+
+
+@media (min-width: 767px) {
+    .board-container {
+        width: 800px !important;
+    }
+  }
