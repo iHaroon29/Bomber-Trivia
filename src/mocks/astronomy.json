@@ -1,0 +1,37 @@
+{
+    "Our Solar System": {
+      "Easy": {
+        "Question": "What are the storms produced by the sun called?",
+        "MultipleChoice": ["A) Nebulas", "B) Solar storms", "C) Heat waves", "D) Sun bursts"],
+        "Answer": "B) Solar storms"
+      },
+      "Medium": {
+        "Question": "How long does each season last on Neptune?",
+        "MultipleChoice": ["A) About 5 years", "B) 6 months", "C) Over 40 years", "D) 13 years"],
+        "Answer": "C) Over 40 years"
+      },
+      "Hard": {
+        "Question": "What is the sun's outermost atmosphere called?",
+        "MultipleChoice": ["A) Corona", "B) Ra", "C) Ring of Fire", "D) Alpha"],
+        "Answer": "A) Corona"
+      }
+    },
+  
+    "Constellations": {
+      "Easy": {
+        "Question": "Which constellation contains the stars Castor and Pollux?",
+        "MultipleChoice": ["A) Pegasus", "B) Orion's Belt", "C) Sirius", "D) Gemini"],
+        "Answer": "D) Gemini"
+      },
+      "Medium": {
+        "Question": "How many constellations are there?",
+        "MultipleChoice": ["A) 52", "B) 88", "C) 1,024", "D) 180,383"],
+        "Answer": "B) 88"
+      },
+      "Hard": {
+        "Question": "Which constellation holds the hottest place in the universe?",
+        "MultipleChoice": ["A) Polaris", "B) Ursa Major", "C) Virgo", "D) Cassiopeia"],
+        "Answer": "C) Virgo"
+      }
+    }
+  }

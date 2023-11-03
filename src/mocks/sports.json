@@ -1,0 +1,37 @@
+{
+    "Sports Stars": {
+      "Easy": {
+        "Question": "What command line tool can be used to install Tailwind CSS?",
+        "MultipleChoice": ["A) apt-get", "B) npm", "C) yarn", "D) gem"],
+        "Answer": "B) npm"
+      },
+      "Medium": {
+        "Question": "How do you download Tailwind CSS from npm?",
+        "MultipleChoice": ["A) cd download/tailwind", "B) npm install tailwind", "C) wget tailwind", "D) git clone Tailwind"],
+        "Answer": "B) npm install tailwind"
+      },
+      "Hard": {
+        "Question": "Out of all the available Tailwind CSS plugins, which one allows the generation of dark mode stylesheets?",
+        "MultipleChoice": ["A) Tailwind UI", "B) Tailwind Typography", "C) Tailwind RGL", "D) Tailwind Dark Mode"],
+        "Answer": "D) Tailwind Dark Mode"
+      }
+    },
+  
+    "National Olympics": {
+      "Easy": {
+        "Question": "Why did Bobby Pearce slow down during his rowing race at the 1928 Olympics in Amsterdam?",
+        "MultipleChoice": ["A) He lost his oar", "B) To wave to his girlfriend", "C) To let a family of ducks pass", "D) To save a drowning child"],
+        "Answer": "C) To let a family of ducks pass"
+      },
+      "Medium": {
+        "Question": "The longest wrestling match in Olympic history lasted how many hours?",
+        "MultipleChoice": ["A) 3 hours", "B) 5 hours", "C) 11 hours", "D) 15 hours"],
+        "Answer": "C) 11 hours"
+      },
+      "Hard": {
+        "Question": "Which of these animals were used in the 1900 olympics?",
+        "MultipleChoice": ["A) Pigeons", "B) Elephants", "C) Bears", "D) Camels"],
+        "Answer": "A) Pigeons"
+      }
+    }
+  }

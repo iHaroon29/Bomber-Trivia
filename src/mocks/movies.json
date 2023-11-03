@@ -1,0 +1,37 @@
+{
+    "Animated Movies": {
+      "Easy": {
+        "Question": "WWhat was the first feature-length animated movie ever released?",
+        "MultipleChoice": ["A) Mickey Mouse", "B) Snow White and the Seven Dwarfs", "C) Bambi", "D) Popeye"],
+        "Answer": "B) Snow White and the Seven Dwarfs"
+      },
+      "Medium": {
+        "Question": "What animated classic was the first film of the late 20th century 'Disney Renaissance?'",
+        "MultipleChoice": ["A) The Little Mermaid", "B) Tarzan", "C) Hercules", "D) Beauty and the Beast"],
+        "Answer": "A) The Little Mermaid"
+      },
+      "Hard": {
+        "Question": "What was the name of the crocodile in the movie Peter Pan?",
+        "MultipleChoice": ["A) Gabby Gator", "B) Killer Croc", "C) Leatherhead", "D) Tick Tock"],
+        "Answer": "D) Tick Tock"
+      }
+    },
+  
+    "Classics": {
+      "Easy": {
+        "Question": "In the Matrix, what color pill does Neo take?",
+        "MultipleChoice": ["A) Blue", "B) Green", "C) Red", "D) Yellow"],
+        "Answer": "C) Red"
+      },
+      "Medium": {
+        "Question": "What's the name of the skyscraper in Die Hard?",
+        "MultipleChoice": ["A) Empire State Building", "B) Willis Tower", "C) Christmas Tower", "D) Nakatomi Plaza"],
+        "Answer": "D) Nakatomi Plaza"
+      },
+      "Hard": {
+        "Question": "In what 1976 thriller does Robert De Niro famously say 'You talkin' to me?'",
+        "MultipleChoice": ["A) The Godfather", "B) Taxi Driver", "C) True Confessions", "D) Casino"],
+        "Answer": "B) Taxi Driver"
+      }
+    }
+  }

@@ -2,6 +2,9 @@ import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { postData } from '../../utils/axios_utils'
 import './StartPage.css'
+import astroMock from '../../mocks/astronomy.json'
+import moviesMock from '../../mocks/movies.json'
+import sportsMock from '../../mocks/sports.json'
 
 const StartPage = (props) => {
   const [generatedText, setGeneratedText] = useState('')
@@ -56,7 +59,7 @@ const StartPage = (props) => {
       </h2>
       <h2 className='text-lg text-center mb-8'>---</h2>
       <h2 className='text-lg text-center mb-8'>
-        To start, enter a theme and press <strong>START</strong>
+        To start, choose a topic and press <strong>START</strong>
       </h2>
       <div className='w-full max-w-md'>
         <div className='flex items-center border-b border-b-2 border-teal-500 py-2'>
