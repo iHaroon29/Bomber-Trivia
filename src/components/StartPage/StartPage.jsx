@@ -28,24 +28,24 @@ const StartPage = (props) => {
     setIsLoading(true)
 
     try {
-      const response = await postData('/completions', {
-        prompt: `
-        Generate a JSON object for me which will contain quiz data for the topic of ${inputRef.current?.value}.
-        The JSON object MUST always has 2 categories based on the topic of ${inputRef.current?.value}, with 3 questions per category, for a total of 6 questions.
-        The JSON object MUST follows this structure:
-        ${JSON.stringify(mockJson)}
-        `,
-        max_tokens: 2056,
-        model: 'text-davinci-003',
+      const response = await postData('https://api.openai.com/v1/chat/completions', {
+        messages: [{
+          role: 'system',
+          content: `Generate a JSON object for me which will contain quiz data for the topic of ${inputRef.current?.value}.
+        The JSON object MUST always has 2 categories based on the topic of ${inputRef.current?.value}, with 3 questions per category, for a total of 6 questions which is MANDATORY.
+        The JSON object MUST follows this JSON structure but the content MUST be based on the topic of ${inputRef.current?.value}:
+        ${JSON.stringify(mockJson)}`
+        }],
+        model: "gpt-4",
         temperature: 0.1,
       })
       if (response.data.choices && response.data.choices.length > 0) {
-        setGeneratedText(response.data.choices[0].text)
-        props.setQuizData(response.data.choices[0].text)
+        setGeneratedText(response.data.choices[0].message.content)
+        props.setQuizData(response.data.choices[0].message.content)
         props.setAuth(true)
         navigate('/jeopardy')
       } else {
-        throw new Error('Error:Could not generate text')
+        throw new Error('Error: Could not generate text')
       }
     } catch (error) {
       showBoundary(error.message)
